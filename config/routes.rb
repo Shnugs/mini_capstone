@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   namespace :api do
-    get "/item_1" => "products#item_action"
+    get '/first_product' => 'products#product_action'
+    get '/all_products' => 'products#all_products'
+    get '/card' => 'products#single_item'
   end
 end
