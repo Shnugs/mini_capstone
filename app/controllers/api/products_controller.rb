@@ -1,18 +1,42 @@
 class Api::ProductsController < ApplicationController
-  def product_action
-    @card = MagicCard.first
-    render 'product_view.json.jbuilder'
+  def index
+    @products = MagicCard.all
+    render 'index.json.jbuilder'
   end
 
-  def all_products
-    @products = MagicCard.all 
-    render 'all_products.json.jbuilder'
+  def create
+    @product = MagicCard.new(
+                              name: params[:name],
+                              price: params[:price],
+                              image_url: params[:image_url],
+                              description: params[:description]
+                            )
+    @product.save
+    render 'show.json.jbuilder'
   end
 
-  def single_item
-    card_id = params[:id].to_i
-    @card = MagicCard.find(card_id)
-    render 'product_view.json.jbuilder'
+  def show
+    @product = MagicCard.find(params[:id])
+    render 'show.json.jbuilder'
+  end
+
+  def update
+    @product = MagicCard.find(params[:id])
+
+    @product.name = params[:name] || @product.name
+    @product.price = params[:price] || @product.price
+    @product.image_url = params[:image_url] || @product.image_url
+    @product.description = params[:description] || @product.description
+
+    @product.save
+
+    render 'show.json.jbuilder'
+  end
+
+  def destroy
+    product = MagicCard.find(params[:id])
+    product.destroy
+    render json: {message: "Successfully sent item to graveyard!"}
   end
 
 end
