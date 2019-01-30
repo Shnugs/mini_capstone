@@ -14,9 +14,9 @@ class Api::ProductsController < ApplicationController
     sort_attribute = params[:sort] || [:id]
     sort_order = params[:sort_order] || [:name]
 
-    if sort_attribute and sort_order
-      @products = @products.order(sort_attribute => sort_order)
-    end
+    # if sort_attribute and sort_order
+    #   @products = @products.order(sort_attribute => sort_order)
+    # end
 
     render 'index.json.jbuilder'
   end

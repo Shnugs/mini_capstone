@@ -17,5 +17,5 @@ json.supplier do
 end
 
 json.images do 
-  json.array! product.images, partial: "api/images/imagef", as: :image
+  json.array! product.images, partial: "api/images/image", as: :image
 end
